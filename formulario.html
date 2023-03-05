@@ -10,24 +10,47 @@
             rel="stylesheet"
             integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
             crossorigin="anonymous">
+        <link rel="stylesheet" href="formulario.css">
     </head>
     <body>
         <main>
-            <form class="border border-warning" method="post" autocomplete="on"
-                action="" varios.php">
+            <form class="border border-warning" method="post" enctype="multipart/form-data"  autocomplete="on"
+                action="varios.php">
+                <!--El form es la etiqueta de los formularios. El método GET envía los datos usando la URL, el método POST los envía de forma que no podemos verlos.
+                Para poder enviar archivos debe especificarse el valor del atributo enctype = "multipart/form-data"  
+                autocomplete="on" el que aparecerán los valores que anteriormente haya podido escribir el usuario
+                action: fichero que define la ubicación donde se envían los datos del formulario. Suele ser un fichero tipo php
+                -->
                 <fieldset class="bg-white border border-rounded form-group">
+                    <!--Fieldset: representa un conjunto de controles en un formulario -->
+                    <!--form-group te permite agrupar elementos dentro de una forma-->
+
                     <legend>NOMBRE DEL TUTOR/A LEGAL DEL ALUMNO</legend>
 
                     <div class="row border border-danger text-center">
+                        <!--utilizamos el sistema grid, definimos una fila-->
                         <div class="col col-lg-2 bg-secondary">
+                            <!--definimos una columna cl e indicamos, en modo responsive, que se utilizarán dos columnas en el tamaño lg
+                            se podrían definir todos los tamaños posibles
+                        Para ello se utilizarán los breakpoints de bootstrap: sm md lg xl xxl-->
                             <label for="nombre">Nombre:</label>
+                            <!--cuando utilizamos un label for tenemos que poner el mismo nombre que el name del elemento que queremos unir
+                            Es decir, si el usuario hace clic en la etiqueta el foco se pondría en el input text de nombre (abajo)-->
                         </div>
                         <div class="col col-lg-3">
+                            <!--vamos agregando columnas hasta completar las 12 máximas que puede tener un grid en bootstrap-->
                             <input type="text" id="nombre" name="nombre"
-                                class="form-control" required
-                                placeholder="Escribe
-                                el apellido con 20 caracteres como máximo"
+                                class="form-control" title="Este es el nombre en formato de título" required
+                                placeholder="Escribe el apellido con 20 caracteres como máximo"
                                 maxlength="20">
+                                <!--campo de entrada texto El name es el valor o variable que se usa para enviar datos al servidor
+                                el valor puede estar en value y el id es el identificativo que se suele usar con el DOM en Javascript
+                                el form-control es una clase que nos da bootstrap y que permite identificar un campo de entrada.
+                                Maxlength indica cuál es el máximo tamaño de dígitos que se pueden introducir
+                                placeholder  el mensaje que aparece, antes de introducir un valor o tener el foco, en un campo de entrada
+                                title: es el mensaje que aparece al poner el ratón en el foco de la entrada del elemento
+
+                            -->
                         </div>
                         <div class="col col-lg-2 bg-secondary">
                             <label for="apellido">Apellidos:</label>
@@ -38,6 +61,13 @@
                                 class="form-control" placeholder="Escribe el
                                 apellido con 30 caracteres como máximo"
                                 pattern="[A-Za-z0-9_-\s]+">
+                                <!--el pattern es el patrón de entrada que hemos definido para este campo
+                                le indicamos que puede contener letras desde la A hasta la Z, desde la a hasta z (minúsculas), los dígitos numéricos
+                            el _ (guión bajo), el - (guión intermedio) espacio \s
+                                al poner +, significa que puede tener 1 o muchos
+                                        *, 0 o muchos
+                                    {2,30} le indicamos que puede tener de 2 hasta 30
+                                Esto sería porque el minlength es 2 (mínimo dos caracteres)-->
                         </div>
                     </div>
                     <h3>CORREO / DOCUMENTO IDENTIFICATIVO</h3>
@@ -50,6 +80,17 @@
                                 class="form-control" placeholder="Correo
                                 Electrónico del tutor/a legal"
                                 aria-label="correo">
+                                <!--los atributos aria sirven para dar nombre accesible a los elementos-->
+                                <!--hay varios tipos de input, además del text y del email.
+                                text: texto
+                                passwd: contraseñas
+                                submit: enviar formularios
+                                reset: resetear o limpiar valores del formulario actual
+                                radio seleccionar una opción entre varias
+                                checkbox: seleccionar ninguna, una o varias 
+                                button: definir botones
+                            color: para elegir colores
+                            Y muchos otros como: number, range, time, date, url, search, entre otros-->
                         </div>
                         <div class="bg-info col col-lg-2">
                             <label for="dni">DNI:</label>
@@ -61,94 +102,187 @@
                                 pattern="[0-9]{8}-[A-Z]{1}" title="ejemplo:
                                 44444444-A"
                                 aria-label="Documento Identificativo">
+                                <!--este es un caso de patrón específico en el que pedimos 8 dígitos numéricos y una letra mayúscula-->
                         </div>
                     </div>
                 </fieldset>
-                <div class="row border border-warning border-5 bg-warning">
-                    <div class="col col-lg-6">
-                        <div class="form-group bg-white border border-info">
-                            <label for="genero">Género</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio"
-                                    name="genero" id="hombre" value="hombre"
-                                    checked>
-                                <label class="form-check-label"
-                                    for="hombre">
-                                    Masculino
-                                </label>
+                <!--RADIO BUTTON LIST-->
+                <fieldset class="border border-5 border-danger m-2
+                    p-2form-group">
+                    <legend>Género / Estudios</legend>
+                    <div class="row border border-warning border-5 bg-warning">
+                        <div class="col col-lg-6">
+                            <div class="form-group bg-white border border-info">
+                                <label for="genero">Género</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio"
+                                        name="genero" id="hombre" value="hombre"
+                                        checked>
+                                    <label class="form-check-label"
+                                        for="hombre">
+                                        Masculino
+                                    </label>
+                                </div>
+                                <!--observamos algo diferente a los inputs anteriores:
+                                el campo name es el mismo para todas las posibles opciones, mientras que el value y el id
+                                cambia para cada valor de cada opción.-->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio"
+                                        name="genero" id="mujer" value="mujer">
+                                    <label class="form-check-label" for="mujer">
+                                        Femenino
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio"
+                                        name="genero" id="otro" value="otro">
+                                    <label class="form-check-label" for="otro">
+                                        Otro
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio"
-                                    name="genero" id="mujer" value="mujer">
-                                <label class="form-check-label" for="mujer">
-                                    Femenino
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio"
-                                    name="genero" id="otro" value="otro">
-                                <label class="form-check-label" for="otro">
-                                    Otro
-                                </label>
-                            </div>
-                        </div>
                         </div>
                         <div class="col col-lg-4">
                             <div class="form-group bg-white border
                                 border-warning border-3">
                                 <label for="estudios">Nivel de Estudios</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"
+                                    <input.0" type="radio"
                                         name="estudios" id="sin" value="sin">
-                                    <label class="form-check-label"
-                                        for="estudios">
-                                        Básicos
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                        name="estudios" id="eso" value="eso">
-                                    <label class="form-check-label"
-                                        for="estudios">
-                                        ESO
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                        name="estudios" id="Bachiller"
-                                        value="Bachiller" checked>
-                                    Bachillerato
+                                        <label class="form-check-label"
+                                            for="estudios">
+                                            Básicos
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            name="estudios" id="eso"
+                                            value="eso">
+                                        <label class="form-check-label"
+                                            for="estudios">
+                                            ESO
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            name="estudios" id="Bachiller"
+                                            value="Bachiller" checked>
+                                        Bachillerato
 
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                        name="estudios" id="ciclos"
-                                        value="ciclos">
-                                    Formación Profesional
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            name="estudios" id="ciclos"
+                                            value="ciclos">
+                                        Formación Profesional
 
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                        name="estudios" id="Superiores"
-                                        value="Superiores">
-                                    Estudios Superiores (Universidad / Ciclos
-                                    GS)
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input"
+                                            type="radio"
+                                            name="estudios" id="Superiores"
+                                            value="Superiores">
+                                        Estudios Superiores (Universidad /
+                                        Ciclos
+                                        GS)
+                                    </div>
+
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
+                </fieldset>
+                <!--CHECK LIST-->
+                <fieldset class="border border-5 border-danger m-2 p-2
+                    form-group">
+                    <legend>AFICIONES</legend>
+                    <div class="row border border-warning border-5 bg-info
+                        align-items-center">
+                        <div class="col col-lg-6">
+                            <div class="form-group bg-white border border-info">
+                                <label for="aficion">Aficiones</label>
+                                <div class="form-check">
+                                    <!--el checkbox es parecido al radio pero con una clara salvedad: el usuario puede elegir ninguna, 
+                                        una o varias posibilidades
+                                    Por ello tenemos que definir una array en el name para que guarde, a la hora de enviar la respuesta al servidor,
+                                    cada una de las elecciones realizadas. De no usar un array, sólo guardará la última opción.-->
+                                    <input type="checkbox" name="aficion[]"
+                                        id="leer" value="leer">LEER<br>
+                                    <input type="checkbox" name="aficion[]"
+                                        id="videojuegos" value="videojuegos"
+                                        checked>VIDEOJUEGOS<br>
+                                    <input type="checkbox" name="aficion[]"
+                                        id="TV"
+                                        value="TV">TV<br>
+                                    <input type="checkbox" name="aficion[]"
+                                        id="DEPORTE" value="DEPORTE">DEPORTE<br>
+                                    <input type="checkbox" name="aficion[]"
+                                        id="sedentario" value="sedentario">SEDENTARIO<br>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col col-lg-6">
+                            <p class="text-center text-white">Recuerda que
+                                puedes elegir más de una opción</p>
+                        </div>
                     </div>
-                </form>
-            </main>
-            <script
-                src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
-                integrity="sha384-q9CRHqZndzlxGLOj+xrdLDJa9ittGte1NksRmgJKeCV9DrM7Kz868XYqsKWPpAmn"
-                crossorigin="anonymous"></script>
-            <script
-                src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-                integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-                crossorigin="anonymous"></script>
-        </body>
-    </html>
+                </fieldset>
+                <fieldset class="border border-5 border-success m-2 p-2
+                    form-group fondo-formulario">
+                    <legend>Documentación Adjunta</legend>
+                    <div class="form-group">
+                        <label for="archivo1">DNI / CARNET / DOCUMENTO ALUMNO/A</label>
+                        <!--el input type file nos permite adjuntar ficheros
+                        Hay muchas formas de realizarlo. Debemos tener en consideración que el fichero definido en form (en nuestro caso varios.php) 
+                    debe contemplar la forma de gestionar en el servidor de destino la subida de los ficheros
+                    Si disponemos de la forma de controlar la gestión, tambiénm se podría utilizar un array para ir guardando cada uno de los ficheros adjuntados
+                     <input type="file" class="form-control" id="miarchivo[]" name="miarchivo[]" multiple="">
+                -->
+                        <input type="file" class="form-control-file" id="archivo1" name="archivo1" accept=".pdf,.jpg,.png.tiff,.bmp">
+                      </div>
+                      <div class="form-group">
+                        <label for="archivo2">JUSTIFICANTE DE PAGO:</label>
+                        <input type="file" class="form-control-file" id="archivo2" name="archivo2" accept=".pdf,.jpg,.png.tiff,.bmp">
+                      </div>
+                </fieldset>
+                <!--botones-->
+                <section>
+                    <fieldset>
+                        <legend>
+                            BOTONES DE ENVIAR / GUARDAR / LIMPIAR
+                        </legend>
+                        <div class="row border border-success border-2">
+                            <div class="col col-6 bg-secondary">
+                                <div class="form-group text-primary">
+                                    <button type="submit" class="btn btn-success
+                                        rounded-pill ">Enviar</button>
+                                        <!--los botones le hemos utilizado una clase pill para que parezca una especie de espiral, dejando
+                                        un efecto bonito al botón-->
+                                    <button type="button" class="btn btn-primary
+                                        rounded-pill ">Guardar</button>
+                                    <button type="reset" class="btn btn-danger
+                                        rounded-pill ">Limpiar</button>
+                                </div>
+    
+                            </div>
+                        </div>
+                    </fieldset>
+                </section>
+            </form>
+        </main>
+        <!--además del main, podrías añadir al documento tu header, tu nav, tu footer para mantener la estructura semántica de tu proyecto web-->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js"
+            integrity="sha384-q9CRHqZndzlxGLOj+xrdLDJa9ittGte1NksRmgJKeCV9DrM7Kz868XYqsKWPpAmn"
+            crossorigin="anonymous"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+    </body>
+</html>
